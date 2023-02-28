@@ -1,4 +1,4 @@
-package com.monopolycapstone.accountservice;
+package com.monopolycapstone;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
