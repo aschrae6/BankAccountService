@@ -38,4 +38,26 @@ public class AccountServiceImpl implements AccountService {
         ar.deleteById(id);
         return "Account Deleted Successfully";
     }
+
+    @Override
+    public Account deposit(Account a) {
+        Account account = getAccount((int) a.getBalance());
+        if(account == null) return null;
+        return ar.save(account);
+//        return null;
+    }
+
+    @Override
+    public Account withdrawl(Account a) {
+        Account account = getAccount((int) a.getBalance());
+        if(account == null) return null;
+
+        return ar.save(account);
+//        return null;
+    }
+
+    @Override
+    public Account transfer(Account a) {
+        return null;
+    }
 }

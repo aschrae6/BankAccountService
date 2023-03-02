@@ -2,6 +2,7 @@ package com.monopolycapstone.controllers;
 
 
 import com.monopolycapstone.models.Account;
+import com.monopolycapstone.models.Command;
 import com.monopolycapstone.services.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -54,5 +55,21 @@ public class AccountController {
     public String deleteAccount(@PathVariable int id) {
         return as.deleteAccount(id);
     }
+@PatchMapping("/{id}")
+    public ResponseEntity<Account> accountTransactions(@RequestBody Command cmd, @PathVariable int id){
+        Account a = as.getAccount(id);
+        if(cmd.getCommand().equals("withdrawl")) {
+            a = as.withdrawl(a);
+        } else if(cmd.getCommand().equals("deposit")) {
+            a = as.deposit(a);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
+    }
+
+//    public ResponseEntity<Account> accountTransfers(Command cmd, int id) {
+//
+//    }
 
 }
