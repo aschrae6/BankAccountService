@@ -38,4 +38,38 @@ public class AccountServiceImpl implements AccountService {
         ar.deleteById(id);
         return "Account Deleted Successfully";
     }
+
+    @Override
+    public double deposit(int id, int amount) throws IllegalArgumentException{
+        Account account = getAccount(id);
+        if(account == null || amount < 0) {
+
+            throw new IllegalArgumentException();
+        }
+        double currentBalance = account.getBalance();
+        double newBalance = currentBalance + amount;
+        account.setBalance(newBalance);
+        ar.save(account);
+
+        return newBalance;
+    }
+
+    @Override
+    public double withdrawal(int id, int amount) throws IllegalArgumentException{
+        Account account = getAccount(id);
+        if(account == null || amount > account.getBalance()){
+            throw new IllegalArgumentException();
+        }
+        double currentBalance = account.getBalance();
+        double newBalance = currentBalance - amount;
+        account.setBalance(newBalance);
+        ar.save(account);
+
+        return newBalance;
+    }
+
+    @Override
+    public Account transfer(Account a) {
+        return null;
+    }
 }

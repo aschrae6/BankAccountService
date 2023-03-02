@@ -11,4 +11,10 @@ public interface AccountService {
     public List<Account> getAllAccounts();
     public Account updateAccount(Account change);
     public String deleteAccount(int id);
+
+    public double withdrawal(int id, int amount);
+    public double deposit(int id, int amount);
+
+
+    public Account transfer(Account a);
 }
