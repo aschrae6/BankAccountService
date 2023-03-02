@@ -42,7 +42,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public double deposit(int id, int amount) throws IllegalArgumentException{
         Account account = getAccount(id);
-        if(account == null || amount >= 0) {
+        if(account == null || amount < 0) {
 
             throw new IllegalArgumentException();
         }
@@ -57,7 +57,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public double withdrawal(int id, int amount) throws IllegalArgumentException{
         Account account = getAccount(id);
-        if(account == null || amount <= account.getBalance()){
+        if(account == null || amount > account.getBalance()){
             throw new IllegalArgumentException();
         }
         double currentBalance = account.getBalance();
