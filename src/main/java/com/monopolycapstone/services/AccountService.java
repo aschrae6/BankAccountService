@@ -12,8 +12,9 @@ public interface AccountService {
     public Account updateAccount(Account change);
     public String deleteAccount(int id);
 
-    public Account withdrawl(Account a);
-    public Account deposit(Account a);
+    public double withdrawal(int id, int amount);
+    public double deposit(int id, int amount);
+
 
     public Account transfer(Account a);
 }

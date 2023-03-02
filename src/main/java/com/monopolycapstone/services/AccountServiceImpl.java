@@ -40,20 +40,32 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Account deposit(Account a) {
-        Account account = getAccount((int) a.getBalance());
-        if(account == null) return null;
-        return ar.save(account);
-//        return null;
+    public double deposit(int id, int amount) throws IllegalArgumentException{
+        Account account = getAccount(id);
+        if(account == null || amount >= 0) {
+
+            throw new IllegalArgumentException();
+        }
+        double currentBalance = account.getBalance();
+        double newBalance = currentBalance + amount;
+        account.setBalance(newBalance);
+        ar.save(account);
+
+        return newBalance;
     }
 
     @Override
-    public Account withdrawl(Account a) {
-        Account account = getAccount((int) a.getBalance());
-        if(account == null) return null;
+    public double withdrawal(int id, int amount) throws IllegalArgumentException{
+        Account account = getAccount(id);
+        if(account == null || amount <= account.getBalance()){
+            throw new IllegalArgumentException();
+        }
+        double currentBalance = account.getBalance();
+        double newBalance = currentBalance - amount;
+        account.setBalance(newBalance);
+        ar.save(account);
 
-        return ar.save(account);
-//        return null;
+        return newBalance;
     }
 
     @Override
